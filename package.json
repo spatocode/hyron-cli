@@ -1,0 +1,49 @@
+{
+  "name": "hyron-cli",
+  "version": "1.0.0",
+  "description": "Hyron application CLI tool",
+  "private": true,
+  "author": "Ekene Izukanne <ekeneizukanne@gmail.com>",
+  "homepage": "https://github.com/spatocode/hyron-cli#README",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spatocode/hyron-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spatocode/hyron-cli/issues"
+  },
+  "licence": "MIT",
+  "keywords": [
+    "hyron",
+    "framework",
+    "plugin",
+    "app",
+    "api",
+    "web",
+    "CLI"
+  ],
+  "dependencies": {
+    "commander": "^2.19.0"
+  },
+  "main": "bin/index.js",
+  "preferGlobal": true,
+  "bin": {
+    "hyron": "./bin/hyron-cli"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha"
+  }
+}
