@@ -24,4 +24,8 @@ module.exports = () => {
       .replace(/^[-_.]+|-+$/g, '')
       .toLowerCase()
   }
+
+  function createApplication () {
+    
+  }
 }
