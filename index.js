@@ -32,5 +32,18 @@ module.exports = () => {
 
     console.log(`Creating a new Hyron app in ${chalk.green(root)}`)
     console.log()
+
+    // Package
+    const packageJson = {
+      name: appName,
+      version: '0.0.0',
+      private: true,
+      scripts: {
+        start: 'node ./bin/www'
+      },
+      dependencies: {
+        'hyron': '~1.9.10'
+      }
+    }
   }
 }
