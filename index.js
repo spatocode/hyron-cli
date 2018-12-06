@@ -1,6 +1,7 @@
 const program = require('commander')
-const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
+const fs = require('fs-extra')
 const { version } = require('./package.json')
 
 module.exports = () => {
@@ -10,4 +11,17 @@ module.exports = () => {
     .option('init <option>', 'initialize a new hyron app')
     .parse(process.argv)
   if (program.init) console.log(`created a new hyron app`)
+
+  /**
+   * Create an app name, enforcing npm naming requirements
+   *
+   * @param {String} name
+   */
+
+  function createAppName (name) {
+    return path.basename(name)
+      .replace(/[^A-Za-z0-9,-]+/g, '-')
+      .replace(/^[-_.]+|-+$/g, '')
+      .toLowerCase()
+  }
 }
