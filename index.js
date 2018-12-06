@@ -26,6 +26,11 @@ module.exports = () => {
   }
 
   function createApplication () {
-    
+    let root = path.resolve(program.args.shift())
+    const appName = createAppName(root) || 'hello-world'
+    fs.ensureDirSync(appName)
+
+    console.log(`Creating a new Hyron app in ${chalk.green(root)}`)
+    console.log()
   }
 }
