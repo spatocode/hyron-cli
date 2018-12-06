@@ -8,6 +8,7 @@ module.exports = () => {
   program
     .name('hyron')
     .version(`v${version}`, '--v, --version')
+    .help()
     .option('init <option>', 'initialize a new hyron app')
     .parse(process.argv)
   if (program.init) console.log(`created a new hyron app`)
