@@ -109,4 +109,20 @@ module.exports = () => {
     fs.writeFileSync(path.join(rootDir, 'simpleApp.js'), simpleApp)
     fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'styles.css'), styles)
   }
+
+  if (projectName) createApplication()
+  if (typeof projectName === 'undefined') {
+    console.error('Please specify the project name:')
+    console.log(
+      `  ${chalk.cyan(program.name())} ${chalk.green('<project-name>')}`
+    )
+    console.log()
+    console.log('For example:')
+    console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-hyron-app')}`)
+    console.log()
+    console.log(
+      `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
+    )
+    process.exit(1)
+  }
 }
