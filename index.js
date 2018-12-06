@@ -50,6 +50,13 @@ module.exports = () => {
       }
     }
 
+    mkdir(root, 'routes')
+    mkdir(root, 'views')
+    mkdir(root, 'public')
+    mkdir(root, 'public/javascripts')
+    mkdir(root, 'public/stylesheets')
+    mkdir(root, 'public/images')
+
     fs.writeFileSync(
       path.join(root, 'package.json'),
       JSON.stringify(packageJson, null, 2)
@@ -63,6 +70,19 @@ module.exports = () => {
     var contents = fs.readFileSync(path.join(__dirname, 'files', fileName), 'utf-8')
 
     return contents
+  }
+
+  /**
+   * Create new directories
+   * @param {String} rootDir
+   * @param {Array} newDir
+   */
+
+  function mkdir (rootDir, newDir) {
+    var dir = path.join(rootDir, newDir)
+    console.log(`   \x1b[36mcreate\x1b[0m :  ${chalk.green(dir)}${chalk.green(path.sep)}`)
+
+    fs.mkdirSync(dir)
   }
 
   createApplication()
