@@ -49,6 +49,14 @@ module.exports = () => {
         'hyron': '~1.9.10'
       }
     }
+
+    fs.writeFileSync(
+      path.join(root, 'package.json'),
+      JSON.stringify(packageJson, null, 2)
+    )
+
+    fs.writeFileSync(path.join(root, 'app.js'), app)
+    fs.writeFileSync(path.join(root, 'simpleApp.js'), simpleApp)
   }
 
   function loadFile (fileName) {
