@@ -33,6 +33,10 @@ module.exports = () => {
     console.log(`Creating a new Hyron app in ${chalk.green(root)}`)
     console.log()
 
+    // JavaScript
+    const app = loadFile('js/app.js')
+    const simpleApp = loadFile('js/simpleApp.js')
+
     // Package
     const packageJson = {
       name: appName,
@@ -46,4 +50,12 @@ module.exports = () => {
       }
     }
   }
+
+  function loadFile (fileName) {
+    var contents = fs.readFileSync(path.join(__dirname, 'files', fileName), 'utf-8')
+
+    return contents
+  }
+
+  createApplication()
 }
