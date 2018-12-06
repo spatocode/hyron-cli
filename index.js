@@ -4,12 +4,28 @@ const chalk = require('chalk')
 const fs = require('fs-extra')
 const { version } = require('./package.json')
 
+let projectName
+
 module.exports = () => {
   program
     .name('hyron')
     .version(`v${version}`, '--v, --version')
-    .help()
-    .option('init <option>', 'initialize a new hyron app')
+    .arguments('<project-name>')
+    .usage(`${chalk.green('<project-name>')} [options]`)
+    .action(name => {
+      projectName = name
+    })
+    .on('--help', () => {
+      console.log()
+      console.log(
+        `    If you have any problems, do not hesitate to file an issue:`
+      )
+      console.log(
+        `      ${chalk.cyan(
+          'https://github.com/spatocode/hyron-cli/issues/new'
+        )}`
+      )
+    })
     .parse(process.argv)
   if (program.init) console.log(`created a new hyron app`)
 
@@ -93,6 +109,4 @@ module.exports = () => {
     fs.writeFileSync(path.join(rootDir, 'simpleApp.js'), simpleApp)
     fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'styles.css'), styles)
   }
-
-  createApplication()
 }
