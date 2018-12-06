@@ -38,7 +38,7 @@ module.exports = () => {
     const simpleApp = loadFile('js/simpleApp.js')
 
     // Styles
-    const styles = loadFile('js/styles.css')
+    const styles = loadFile('stylesheets/styles.css')
 
     // Package
     const packageJson = {
