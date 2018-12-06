@@ -37,6 +37,9 @@ module.exports = () => {
     const app = loadFile('js/app.js')
     const simpleApp = loadFile('js/simpleApp.js')
 
+    // Styles
+    const styles = loadFile('js/styles.css')
+
     // Package
     const packageJson = {
       name: appName,
@@ -57,13 +60,7 @@ module.exports = () => {
     mkdir(root, 'public/stylesheets')
     mkdir(root, 'public/images')
 
-    fs.writeFileSync(
-      path.join(root, 'package.json'),
-      JSON.stringify(packageJson, null, 2)
-    )
-
-    fs.writeFileSync(path.join(root, 'app.js'), app)
-    fs.writeFileSync(path.join(root, 'simpleApp.js'), simpleApp)
+    generateFiles(root, packageJson, app, simpleApp, styles)
   }
 
   function loadFile (fileName) {
@@ -83,6 +80,17 @@ module.exports = () => {
     console.log(`   \x1b[36mcreate\x1b[0m :  ${chalk.green(dir)}${chalk.green(path.sep)}`)
 
     fs.mkdirSync(dir)
+  }
+
+  function generateFiles (rootDir, packageJson, app, simpleApp, styles) {
+    fs.writeFileSync(
+      path.join(rootDir, 'package.json'),
+      JSON.stringify(packageJson, null, 2)
+    )
+
+    fs.writeFileSync(path.join(rootDir, 'app.js'), app)
+    fs.writeFileSync(path.join(rootDir, 'simpleApp.js'), simpleApp)
+    fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'styles.css'), styles)
   }
 
   createApplication()
