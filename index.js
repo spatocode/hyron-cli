@@ -118,7 +118,7 @@ module.exports = () => {
 
   function mkdir (rootDir, newDir) {
     var dir = path.join(rootDir, newDir)
-    console.log(`   \x1b[36mcreate\x1b[0m :  ${chalk.green(dir)}${chalk.green(path.sep)}`)
+    console.log(`   ${chalk.cyan('create')} :  ${chalk.green(dir)}${chalk.green(path.sep)}`)
 
     fs.mkdirSync(dir)
   }
