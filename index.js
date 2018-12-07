@@ -2,6 +2,7 @@ const program = require('commander')
 const path = require('path')
 const chalk = require('chalk')
 const fs = require('fs-extra')
+const envinfo = require('envinfo')
 const { version } = require('./package.json')
 
 let projectName
@@ -16,6 +17,7 @@ module.exports = () => {
       projectName = name
     })
     .option('-s, --style <engine>', 'set stylesheet <engine> support (less|stylus|sass) (defaults to plain css)')
+    .option('--info', 'print environment debug info')
     .on('--help', () => {
       console.log()
       console.log(
@@ -28,6 +30,24 @@ module.exports = () => {
       )
     })
     .parse(process.argv)
+
+  if (program.info) {
+    console.log(chalk.bold('\nEnvironment Info:'))
+    return envinfo.run(
+      {
+        System: ['OS', 'CPU'],
+        Binaries: ['Node', 'npm', 'Yarn'],
+        Browsers: ['Chrome', 'Edge', 'Internet Explorer', 'Firefox', 'Safari'],
+        npmPackages: ['hyron'],
+        npmGlobalPackages: ['hyron-cli']
+      },
+      {
+        duplicates: true,
+        showNotFound: true
+      }
+    )
+      .then(console.log)
+  }
 
   /**
    * Create an app name, enforcing npm naming requirements
@@ -69,7 +89,7 @@ module.exports = () => {
         start: 'node ./bin/www'
       },
       dependencies: {
-        'hyron': '~1.9.10'
+        'hyron': '~1.11.8'
       }
     }
 
