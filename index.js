@@ -15,6 +15,7 @@ module.exports = () => {
     .action(name => {
       projectName = name
     })
+    .option('-s, --style <engine>', 'set stylesheet <engine> support (less|stylus|sass) (defaults to plain css)')
     .on('--help', () => {
       console.log()
       console.log(
@@ -27,7 +28,6 @@ module.exports = () => {
       )
     })
     .parse(process.argv)
-  if (program.init) console.log(`created a new hyron app`)
 
   /**
    * Create an app name, enforcing npm naming requirements
@@ -55,7 +55,10 @@ module.exports = () => {
     const simpleApp = loadFile('js/simpleApp.js')
 
     // Styles
-    const styles = loadFile('stylesheets/styles.css')
+    var styles
+
+    // Style extention
+    var ext
 
     // Package
     const packageJson = {
@@ -74,15 +77,36 @@ module.exports = () => {
     mkdir(root, 'views')
     mkdir(root, 'public')
     mkdir(root, 'public/javascripts')
-    mkdir(root, 'public/stylesheets')
     mkdir(root, 'public/images')
+    mkdir(root, 'public/stylesheets')
 
-    generateFiles(root, packageJson, app, simpleApp, styles)
+    switch (program.style) {
+      case 'stylus':
+        styles = loadFile('stylesheets/style.styl')
+        ext = '.styl'
+        break
+      case 'sass':
+        styles = loadFile('stylesheets/style.sass')
+        ext = '.sass'
+        break
+      case 'less':
+        styles = loadFile('stylesheets/style.less')
+        ext = '.less'
+        break
+      case 'compass':
+        styles = loadFile('stylesheets/style.scss')
+        ext = '.scss'
+        break
+      default:
+        styles = loadFile('stylesheets/style.css')
+        ext = '.css'
+    }
+
+    generateFiles(root, packageJson, app, simpleApp, ext, styles)
   }
 
   function loadFile (fileName) {
     var contents = fs.readFileSync(path.join(__dirname, 'files', fileName), 'utf-8')
-
     return contents
   }
 
@@ -99,7 +123,7 @@ module.exports = () => {
     fs.mkdirSync(dir)
   }
 
-  function generateFiles (rootDir, packageJson, app, simpleApp, styles) {
+  function generateFiles (rootDir, packageJson, app, simpleApp, ext, styles) {
     fs.writeFileSync(
       path.join(rootDir, 'package.json'),
       JSON.stringify(packageJson, null, 2)
@@ -107,7 +131,7 @@ module.exports = () => {
 
     fs.writeFileSync(path.join(rootDir, 'app.js'), app)
     fs.writeFileSync(path.join(rootDir, 'simpleApp.js'), simpleApp)
-    fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'styles.css'), styles)
+    fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'style' + ext), styles)
   }
 
   if (projectName) createApplication()
