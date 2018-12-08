@@ -64,7 +64,7 @@ module.exports = () => {
 
   function createApplication () {
     let root = path.resolve(program.args.shift())
-    const appName = createAppName(root) || 'hello-world'
+    const appName = createAppName(root)
     fs.ensureDirSync(appName)
 
     console.log(`Creating a new Hyron app in ${chalk.green(root)}`)
@@ -86,19 +86,18 @@ module.exports = () => {
       version: '0.0.0',
       private: true,
       scripts: {
-        start: 'node ./bin/www'
+        start: 'node app.js'
       },
       dependencies: {
         'hyron': '~1.11.8'
       }
     }
 
-    mkdir(root, 'routes')
-    mkdir(root, 'views')
-    mkdir(root, 'public')
-    mkdir(root, 'public/javascripts')
-    mkdir(root, 'public/images')
-    mkdir(root, 'public/stylesheets')
+    console.log(`   ${chalk.cyan('create')} :  ${chalk.green(appName)}${chalk.green(path.sep)}`)
+    mkdir(appName, 'public')
+    mkdir(appName, 'public/javascripts')
+    mkdir(appName, 'public/images')
+    mkdir(appName, 'public/stylesheets')
 
     switch (program.style) {
       case 'stylus':
@@ -123,6 +122,16 @@ module.exports = () => {
     }
 
     generateFiles(root, packageJson, app, simpleApp, ext, styles)
+
+    mkdir(appName, 'routes')
+    mkdir(appName, 'views')
+
+    console.log()
+    console.log()
+    console.log(` Please run ${chalk.cyan(`cd ${projectName}`)} to navigate to project directory,`)
+    console.log(` ${chalk.cyan('npm install')} to install dependencies, and`)
+    console.log(` ${chalk.cyan('npm start')} to start app`)
+    console.log()
   }
 
   function loadFile (fileName) {
@@ -143,15 +152,22 @@ module.exports = () => {
     fs.mkdirSync(dir)
   }
 
+  // Create new files
   function generateFiles (rootDir, packageJson, app, simpleApp, ext, styles) {
+    fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'style' + ext), styles)
+    console.log(`   ${chalk.cyan('create')} :  ${chalk.green(path.join(projectName, 'public', 'stylesheets', 'style' + ext))}`)
+
     fs.writeFileSync(
       path.join(rootDir, 'package.json'),
       JSON.stringify(packageJson, null, 2)
     )
+    console.log(`   ${chalk.cyan('create')} :  ${chalk.green(path.join(projectName, 'package.json'))}`)
 
     fs.writeFileSync(path.join(rootDir, 'app.js'), app)
+    console.log(`   ${chalk.cyan('create')} :  ${chalk.green(path.join(projectName, 'app.js'))}`)
+
     fs.writeFileSync(path.join(rootDir, 'simpleApp.js'), simpleApp)
-    fs.writeFileSync(path.join(rootDir, 'public', 'stylesheets', 'style' + ext), styles)
+    console.log(`   ${chalk.cyan('create')} :  ${chalk.green(path.join(projectName, 'simpleApp.js'))}`)
   }
 
   if (projectName) createApplication()
