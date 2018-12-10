@@ -31,6 +31,7 @@ module.exports = () => {
     })
     .parse(process.argv)
 
+  // Program info for debugging purposes
   if (program.info) {
     console.log(chalk.bold('\nEnvironment Info:'))
     return envinfo.run(
