@@ -1,4 +1,4 @@
-<img alt="Hyron Logo" src='https://i.imgur.com/mAjPWAu.png' width='240px'/>
+[![Hyron Logo](https://i.imgur.com/mAjPWAu.png)](https://www.npmjs.com/package/hyron-cli)
 
 Create Hyron app with no build configuration
 
