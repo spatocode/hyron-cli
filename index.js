@@ -136,7 +136,7 @@ module.exports = () => {
   }
 
   function loadFile (fileName) {
-    var contents = fs.readFileSync(path.join(__dirname, 'files', fileName), 'utf-8')
+    var contents = fs.readFileSync(path.join(__dirname, 'temp', fileName), 'utf-8')
     return contents
   }
 
