@@ -2,7 +2,6 @@
   "name": "hyron-cli",
   "version": "1.0.0",
   "description": "Create Hyron app with no build configuration",
-  "private": true,
   "author": "Ekene Izukanne <ekeneizukanne@gmail.com>",
   "homepage": "https://github.com/spatocode/hyron-cli#README",
   "repository": {
