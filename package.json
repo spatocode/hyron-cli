@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/spatocode/hyron-cli/issues"
   },
-  "licence": "MIT",
+  "license": "MIT",
   "keywords": [
     "hyron",
     "framework",
@@ -39,7 +39,9 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "tmp": "0.0.33"
   },
   "engines": {
     "node": ">=0.10"
