@@ -1,9 +1,0 @@
-CLI tools
-- [ ] plugins / service search
-- [ ] install plugins / service
-- [ ] publish / update plugins or service to hub
-- [ ] deploy / sync app to server
-- [ ] edit config of app
-- [ ] init app with boilerplate
-
-Processor : @Spatocode
