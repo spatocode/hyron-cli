@@ -1,6 +1,6 @@
 {
   "name": "hyron-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Create Hyron app with no build configuration",
   "author": "Ekene Izukanne <ekeneizukanne@gmail.com>",
   "homepage": "https://github.com/spatocode/hyron-cli#README",
