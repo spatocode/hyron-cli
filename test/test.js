@@ -44,6 +44,26 @@ describe('Hyron', function () {
       assert.notStrictEqual(inst.files.indexOf('foo/simpleApp.js'), 8)
     })
   })
+
+  describe('(unknown args)', function () {
+    var inst = env(this.fullTitle())
+
+    it('should exit with code 1', function (done) {
+      runCLI(inst.dir, ['--foo'], function (err, code, stdout, stderr) {
+        if (err) return done(err)
+        assert.strictEqual(code, 1)
+        done()
+      })
+    })
+
+    it('should print unknown option', function (done) {
+      runCLI(inst.dir, ['--foo'], function (err, code, stdout, stderr) {
+        if (err) return done(err)
+        assert.ok(/error: unknown option/.test(stderr))
+        done()
+      })
+    })
+  })
 })
 
 function runCLI (dir, args, callback) {
