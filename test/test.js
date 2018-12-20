@@ -45,6 +45,20 @@ describe('Hyron', function () {
     })
   })
 
+  describe('--styles <engine>', function () {
+    describe('(no engine)', function () {
+      var inst = env(this.fullTitle())
+
+      it('should exit with code 1', function (done) {
+        runCLI(inst.dir, ['--style'], function (err, code, stdout, stderr) {
+          if (err) return done(err)
+          assert.strictEqual(code, 1)
+          done()
+        })
+      })
+    })
+  })
+
   describe('(unknown args)', function () {
     var inst = env(this.fullTitle())
 
